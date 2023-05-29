@@ -7,6 +7,7 @@ export default class Product extends Component {
   state = {
     info: [],
     infoProducts: [],
+    items: [],
   };
 
   async componentDidMount() {
@@ -17,15 +18,19 @@ export default class Product extends Component {
   }
 
   capturaStorage = () => {
+    const mil = 1000;
     const itemCarrinho = JSON.parse(localStorage.getItem('produto'));
-    this.setState({ infoProducts: (itemCarrinho ?? []) });
+    console.log(itemCarrinho);
+    setTimeout(() => {
+      this.setState({ infoProducts: (itemCarrinho.infoProducts ?? []) });
+    }, mil);
   };
 
   addCarrinho = (product) => {
     let { infoProducts } = this.state;
     if (infoProducts.length === 0) {
       this.setState({ infoProducts: [product] }, () => {
-        const json = JSON.stringify([product]);
+        const json = JSON.stringify(this.state);
         localStorage.setItem('produto', json);
       });
     } else {

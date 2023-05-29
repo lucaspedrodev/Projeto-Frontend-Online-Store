@@ -10,8 +10,11 @@ export default class Cart extends Component {
   }
 
   capturaStorage = () => {
+    const mil = 1000;
     const itemCarrinho = JSON.parse(localStorage.getItem('produto'));
-    this.setState({ items: (itemCarrinho ?? []) });
+    setTimeout(() => {
+      this.setState({ items: (itemCarrinho.infoProducts ?? []) });
+    }, mil);
   };
 
   render() {
@@ -31,10 +34,12 @@ export default class Cart extends Component {
                 <li key={ el.id }>
                   <p data-testid="shopping-cart-product-name">{el.title}</p>
                   <p>{ el.price }</p>
-                  <img src={ el.thumbnail } alt={ el.title } />
+                  <img
+                    src={ el.thumbnail }
+                    alt={ el.title }
+                  />
                   <p data-testid="shopping-cart-product-quantity">
                     Quantidade:
-                    {' '}
                     {1}
                   </p>
                 </li>
